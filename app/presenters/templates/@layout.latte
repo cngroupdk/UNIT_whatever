@@ -27,7 +27,7 @@
 	{block head}{/block}
 </head>
 
-<body>
+<body n:class="$presenter->name === 'Homepage' ? 'landing-page landing-page2'">
 	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
 	{include content}
