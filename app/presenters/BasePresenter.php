@@ -2,14 +2,15 @@
 
 namespace App\Presenters;
 
-use Nette;
-use App\Model;
+use Nette\Application\UI\Presenter;
+use Nette\Bridges\ApplicationLatte\Template;
 
 
 /**
  * Base presenter for all application presenters.
+ * @method Template getTemplate()
  */
-abstract class BasePresenter extends Nette\Application\UI\Presenter
+abstract class BasePresenter extends Presenter
 {
 
 }
