@@ -2,6 +2,6 @@
 
 {foreach $posts as $post}
 	<h1>{$post->author->email}</h1>
+	<p><em>{$post->createdAt|date:'d.m.Y H:i:s'}</em></p>
 	<p>{$post->text}</p>
-	<p>($post->createdAt|date:'d.m.Y H:i:s'}</p>
 {/foreach}
