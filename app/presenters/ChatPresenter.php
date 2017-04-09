@@ -2,6 +2,7 @@
 
 namespace App\Presenters;
 
+use App\Chat\BroadcastProducer;
 use App\Model\Orm;
 use App\Model\Post;
 use Nette\Application\UI\Form;
@@ -18,11 +19,19 @@ class ChatPresenter extends BasePresenter
 	 */
 	public $orm;
 
+	/**
+	 * @var BroadcastProducer
+	 * @inject
+	 */
+	public $broadcastProducer;
+
+
 	public function renderDefault()
 	{
 		$template = $this->getTemplate();
 		$template->add('posts', $this->orm->posts->findAll()->orderBy('createdAt', ICollection::DESC));
 	}
+
 
 	protected function createComponentPostForm()
 	{
@@ -38,6 +47,7 @@ class ChatPresenter extends BasePresenter
 			$post->text = $values->text;
 			$post->createdAt = new \DateTime();
 			$this->orm->persistAndFlush($post);
+			$this->broadcastProducer->broadcast();
 			$this->redirect('this');
 		};
 

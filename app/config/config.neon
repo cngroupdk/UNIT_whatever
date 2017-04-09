@@ -27,10 +27,14 @@ session:
 
 
 services:
+	- App\Chat\BroadcastConsumer
+	- App\Chat\BroadcastProducer
+	- App\Chat\BunnyClientFactory(%bunny%)
+
 	- App\Forms\FormFactory
 	- App\Forms\SignInFormFactory
 	- App\Forms\SignUpFormFactory
-	- App\Chat\BunnyClientFactory(%bunny%)
+
 	router: App\RouterFactory::createRouter
 
 
