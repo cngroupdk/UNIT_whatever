@@ -2,9 +2,9 @@
 
 namespace App\Forms;
 
+use App\Model\Orm;
 use Nette;
 use Nette\Application\UI\Form;
-use App\Model;
 
 
 class SignUpFormFactory
@@ -16,14 +16,14 @@ class SignUpFormFactory
 	/** @var FormFactory */
 	private $factory;
 
-	/** @var Model\UserManager */
-	private $userManager;
+	/** @var Orm */
+	private $orm;
 
 
-	public function __construct(FormFactory $factory, Model\UserManager $userManager)
+	public function __construct(FormFactory $factory, Orm $orm)
 	{
 		$this->factory = $factory;
-		$this->userManager = $userManager;
+		$this->orm = $orm;
 	}
 
 
