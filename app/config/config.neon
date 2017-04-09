@@ -2,6 +2,13 @@
 # WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
 # https://nette.org/security-warning
 #
+extensions:
+	dbal: Nextras\Dbal\Bridges\NetteDI\DbalExtension
+	orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
+	console: Kdyby\Console\DI\ConsoleExtension
+	migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
+
+
 parameters:
 
 
@@ -16,8 +23,17 @@ session:
 
 
 services:
-	- App\Model\UserManager
 	- App\Forms\FormFactory
 	- App\Forms\SignInFormFactory
 	- App\Forms\SignUpFormFactory
 	router: App\RouterFactory::createRouter
+
+
+orm:
+	model: App\Model\Orm
+
+
+migrations:
+	dir: %appDir%/../migrations
+	driver: mysql
+	dbal: nextras

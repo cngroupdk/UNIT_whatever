@@ -1,9 +1,9 @@
 parameters:
 
 
-database:
-	dsn: 'mysql:host=127.0.0.1;dbname=test'
-	user:
-	password:
-	options:
-		lazy: yes
+dbal:
+	driver: mysqli
+	host: 127.0.0.1
+	username: unit
+	password: unittest
+	database: unittest
