@@ -30,6 +30,7 @@ services:
 	- App\Chat\BroadcastConsumer
 	- App\Chat\BroadcastProducer
 	- App\Chat\BunnyClientFactory(%bunny%)
+	- App\Chat\IBroadcastServerFactory
 
 	- App\Forms\FormFactory
 	- App\Forms\SignInFormFactory
@@ -40,6 +41,7 @@ services:
 
 console:
 	commands:
+		- App\Console\BroadcastConsumerCommand
 		- App\Console\CreateUserCommand
 
 

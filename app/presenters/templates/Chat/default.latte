@@ -5,8 +5,10 @@
 	<input n:name="send" />
 </form>
 
-{foreach $posts as $post}
-	<h1>{$post->author->email}</h1>
-	<p><em>{$post->createdAt|date:'d.m.Y H:i:s'}</em></p>
-	<p>{$post->text}</p>
-{/foreach}
+<div data-refresh-url="{link refresh!}" n:snippet="posts" class="ut-posts">
+	{foreach $posts as $post}
+		<h1>{$post->author->email}</h1>
+		<p><em>{$post->createdAt|date:'d.m.Y H:i:s'}</em></p>
+		<p>{$post->text}</p>
+	{/foreach}
+</div>

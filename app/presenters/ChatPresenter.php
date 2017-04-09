@@ -33,6 +33,12 @@ class ChatPresenter extends BasePresenter
 	}
 
 
+	public function handleRefresh()
+	{
+		$this->redrawControl('posts');
+	}
+
+
 	protected function createComponentPostForm()
 	{
 		$form = new Form();

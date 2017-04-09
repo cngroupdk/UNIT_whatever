@@ -5,7 +5,7 @@ namespace App\Chat;
 use Bunny\Async\Client;
 use Bunny\Channel;
 use Bunny\Message;
-use Ratchet\Server\IoServer;
+use Ratchet;
 use React;
 
 
@@ -13,14 +13,19 @@ class BroadcastConsumer
 {
 
 	/**
-	 * @var int
+	 * @var string
 	 */
-	private $websocketPort = 3001;
+	private $websocketHost = 'localhost';
 
 	/**
 	 * @var string
 	 */
-	private $websocketAddress = '0.0.0.0';
+	private $websocketAddress = '127.0.0.1';
+
+	/**
+	 * @var int
+	 */
+	private $websocketPort = 3001;
 
 	/**
 	 * @var string
@@ -33,14 +38,14 @@ class BroadcastConsumer
 	private $bunnyClientFactory;
 
 	/**
-	 * @var WebsocketServer
+	 * @var IBroadcastServerFactory
 	 */
-	private $websocketServer;
+	private $broadcastServerFactory;
 
 	/**
-	 * @var IoServer
+	 * @var BroadcastServer
 	 */
-	private $ioServer;
+	private $broadcastServer;
 
 	/**
 	 * @var React\EventLoop\LoopInterface
@@ -48,9 +53,10 @@ class BroadcastConsumer
 	private $loop;
 
 
-	public function __construct(BunnyClientFactory $bunnyClientFactory)
+	public function __construct(BunnyClientFactory $bunnyClientFactory, IBroadcastServerFactory $broadcastServerFactory)
 	{
 		$this->bunnyClientFactory = $bunnyClientFactory;
+		$this->broadcastServerFactory = $broadcastServerFactory;
 	}
 
 
@@ -81,10 +87,10 @@ class BroadcastConsumer
 			);
 		});
 
-		$socket = new React\Socket\Server($this->loop);
-		$socket->listen($this->websocketPort, $this->websocketAddress);
-		$this->websocketServer = new WebsocketServer();
-		$this->ioServer = new IoServer($this->websocketServer, $socket, $this->loop);
+		$this->broadcastServer = $this->broadcastServerFactory->create();
+
+		$app = new Ratchet\App($this->websocketHost, $this->websocketPort, $this->websocketAddress, $this->loop);
+		$app->route('/broadcast', $this->broadcastServer);
 
 		$this->loop->run();
 	}
@@ -96,6 +102,6 @@ class BroadcastConsumer
 	 */
 	private function handleMessage(Message $message)
 	{
-		$this->websocketServer->broadcast();
+		$this->broadcastServer->broadcast('refresh');
 	}
 }
