@@ -6,22 +6,32 @@ use Bunny\Async\Client;
 
 class BunnyClientFactory
 {
-
 	/**
 	 * @var array
 	 */
-	private $config;
+	private $options;
 
-	public function __construct(array $config)
+
+	public function __construct(array $options)
 	{
-		$this->config = $config;
+		$this->options = $options;
 	}
+
 
 	/**
 	 * @return Client
 	 */
-	public function createClient()
+	public function createAsyncClient()
 	{
-		return new Client($this->config);
+		return new Client($this->options);
+	}
+
+
+	/**
+	 * @return Client
+	 */
+	public function createNonasyncClient()
+	{
+		return new \Bunny\Client($this->options);
 	}
 }
