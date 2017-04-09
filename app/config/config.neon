@@ -26,6 +26,7 @@ services:
 	- App\Forms\FormFactory
 	- App\Forms\SignInFormFactory
 	- App\Forms\SignUpFormFactory
+	- App\Chat\BunnyClientFactory(%bunny%)
 	router: App\RouterFactory::createRouter
 
 

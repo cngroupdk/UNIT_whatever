@@ -1,4 +1,9 @@
 parameters:
+	bunny:
+		host: 127.0.0.1
+		vhost: /unittest
+		user: unit
+		password: unittest
 
 
 dbal:
