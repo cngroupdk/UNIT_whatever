@@ -7,4 +7,9 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Kdyby\\Console\\' => array($vendorDir . '/kdyby/console/src'),
+    'Guzzle\\Stream' => array($vendorDir . '/guzzle/stream'),
+    'Guzzle\\Parser' => array($vendorDir . '/guzzle/parser'),
+    'Guzzle\\Http' => array($vendorDir . '/guzzle/http'),
+    'Guzzle\\Common' => array($vendorDir . '/guzzle/common'),
+    'Evenement' => array($vendorDir . '/evenement/evenement/src'),
 );
