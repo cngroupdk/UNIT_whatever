@@ -2,7 +2,9 @@
 
 namespace App\Chat;
 
-use Bunny\Async\Client;
+use Bunny;
+use React\EventLoop\LoopInterface;
+
 
 class BunnyClientFactory
 {
@@ -19,19 +21,20 @@ class BunnyClientFactory
 
 
 	/**
-	 * @return Client
+	 * @param LoopInterface $eventLoop
+	 * @return Bunny\Async\Client
 	 */
-	public function createAsyncClient()
+	public function createAsyncClient(LoopInterface $eventLoop)
 	{
-		return new Client($this->options);
+		return new Bunny\Async\Client($eventLoop, $this->options);
 	}
 
 
 	/**
-	 * @return Client
+	 * @return Bunny\Client
 	 */
 	public function createNonasyncClient()
 	{
-		return new \Bunny\Client($this->options);
+		return new Bunny\Client($this->options);
 	}
 }
