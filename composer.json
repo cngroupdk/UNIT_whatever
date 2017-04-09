@@ -33,7 +33,8 @@
 		"tracy/tracy": "^2.4",
 		"dg/adminer-custom": "^1.6",
 		"nextras/orm": "^2.2",
-		"nextras/migrations": "^3.0"
+		"nextras/migrations": "^3.0",
+		"kdyby/console": "^2.6"
 	},
 	"require-dev": {
 		"nette/tester": "^1.6"

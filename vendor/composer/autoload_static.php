@@ -10,9 +10,20 @@ class ComposerStaticInit20925b1f7fe223333998c73180ffc6cd
         '7745382c92b7799bf1294b1f43023ba2' => __DIR__ . '/..' . '/tracy/tracy/src/shortcuts.php',
         'e7a6fd2e7a869bb207158e9416bdd9b0' => __DIR__ . '/..' . '/nette/application/src/compatibility.php',
         'a1d067aa2e53d6b47171c03cfc0ea5be' => __DIR__ . '/..' . '/nette/safe-stream/src/loader.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Component\\Debug\\' => 24,
+            'Symfony\\Component\\Console\\' => 26,
+        ),
+        'P' => 
+        array (
+            'Psr\\Log\\' => 8,
+        ),
         'N' => 
         array (
             'Nextras\\Orm\\' => 12,
@@ -22,6 +33,22 @@ class ComposerStaticInit20925b1f7fe223333998c73180ffc6cd
     );
 
     public static $prefixDirsPsr4 = array (
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Component\\Debug\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/debug',
+        ),
+        'Symfony\\Component\\Console\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
         'Nextras\\Orm\\' => 
         array (
             0 => __DIR__ . '/..' . '/nextras/orm/src',
@@ -36,7 +63,23 @@ class ComposerStaticInit20925b1f7fe223333998c73180ffc6cd
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'K' => 
+        array (
+            'Kdyby\\Console\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/kdyby/console/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
+        'KdybyModule\\CliPresenter' => __DIR__ . '/..' . '/kdyby/console/src/Kdyby/Console/CliPresenter.php',
+        'Kdyby\\Console\\Exception' => __DIR__ . '/..' . '/kdyby/console/src/Kdyby/Console/exceptions.php',
+        'Kdyby\\Console\\InvalidApplicationModeException' => __DIR__ . '/..' . '/kdyby/console/src/Kdyby/Console/exceptions.php',
+        'Kdyby\\Console\\InvalidArgumentException' => __DIR__ . '/..' . '/kdyby/console/src/Kdyby/Console/exceptions.php',
+        'Kdyby\\Console\\InvalidStateException' => __DIR__ . '/..' . '/kdyby/console/src/Kdyby/Console/exceptions.php',
+        'Kdyby\\Console\\UnknownCommandException' => __DIR__ . '/..' . '/kdyby/console/src/Kdyby/Console/exceptions.php',
         'Latte\\CompileException' => __DIR__ . '/..' . '/latte/latte/src/Latte/exceptions.php',
         'Latte\\Compiler' => __DIR__ . '/..' . '/latte/latte/src/Latte/Compiler/Compiler.php',
         'Latte\\Engine' => __DIR__ . '/..' . '/latte/latte/src/Latte/Engine.php',
@@ -440,6 +483,7 @@ class ComposerStaticInit20925b1f7fe223333998c73180ffc6cd
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit20925b1f7fe223333998c73180ffc6cd::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit20925b1f7fe223333998c73180ffc6cd::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit20925b1f7fe223333998c73180ffc6cd::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit20925b1f7fe223333998c73180ffc6cd::$classMap;
 
         }, null, ClassLoader::class);
