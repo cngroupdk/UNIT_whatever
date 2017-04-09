@@ -13,4 +13,19 @@ use Nette\Bridges\ApplicationLatte\Template;
 abstract class BasePresenter extends Presenter
 {
 
+	protected function startup()
+	{
+		parent::startup();
+
+		if ($this->getUser()->isLoggedIn()) {
+			if ($this->name === 'Sign' && $this->action !== 'out') {
+				$this->redirect('Chat:');
+			}
+		} else {
+			if (!in_array($this->name, ['Homepage', 'Sign'], true)) {
+				$this->redirect('Sign:in');
+			}
+		}
+	}
+
 }

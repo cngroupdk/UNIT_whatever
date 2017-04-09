@@ -6,18 +6,14 @@
 {block content}
 
 <div class="wrapper">
-	<form class="form-signin">
+	<form class="form-signin" n:name="signInForm">
+		<div n:foreach="$presenter['signInForm']->errors as $error" class="alert alert-danger">{$error}</div>
+
 		<h2 class="form-signin-heading">Please login</h2>
-		<input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
-		<input type="password" class="form-control" name="password" placeholder="Password" required=""/>
+		<input n:name="email" class="form-control" placeholder="Email Address" required="" autofocus="" />
+		<input n:name="password" class="form-control" placeholder="Password" required=""/>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 	</form>
+
 	<p class="text-center"><a n:href="up">Don't have an account yet? Sign up.</a></p>
 </div>
-
-{*{control signInForm}*}
-
-{* OR
-{import '../components/form.latte'}
-{include form signInForm}
-*}

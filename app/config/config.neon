@@ -32,9 +32,7 @@ services:
 	- App\Chat\BunnyClientFactory(%bunny%)
 	- App\Chat\IBroadcastServerFactory
 
-	- App\Forms\FormFactory
-	- App\Forms\SignInFormFactory
-	- App\Forms\SignUpFormFactory
+	- App\Security\Authenticator
 
 	router: App\RouterFactory::createRouter
 

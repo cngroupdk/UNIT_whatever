@@ -36,7 +36,7 @@ class CreateUserCommand extends Command
 
 		$user = new User();
 		$user->email = $email;
-		$user->passwordHash = Passwords::hash($password);
+		$user->setPassword($password);
 		$this->orm->persistAndFlush($user);
 
 		$output->writeln('Email: ' . $email);
