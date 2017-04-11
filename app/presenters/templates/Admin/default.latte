@@ -1,0 +1,20 @@
+{block head}
+	<link href="{$basePath}/css/landing-page.css" rel="stylesheet"/>
+	<link rel="stylesheet" href="{$basePath}/css/simple-line-icons.css">
+	<link rel="stylesheet" href="{$basePath}/css/device-mockups.css">
+{/block}
+
+{block content}
+
+	<ul>
+	{foreach $polls as $poll}
+		<li><a n:href="Admin:feedbacks $poll->id">{$poll->name}</a></li>
+	{/foreach}
+	</ul>
+
+{/block}
+
+{block scripts}
+	{include parent}
+	<script src="{$basePath}/js/awesome-landing-page.js" type="text/javascript"></script>
+{/block}

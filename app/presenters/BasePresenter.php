@@ -2,6 +2,8 @@
 
 namespace App\Presenters;
 
+use App\Model\Orm;
+use App\Model\User;
 use Nette\Application\UI\Presenter;
 use Nette\Bridges\ApplicationLatte\Template;
 
@@ -12,6 +14,16 @@ use Nette\Bridges\ApplicationLatte\Template;
  */
 abstract class BasePresenter extends Presenter
 {
+	/**
+	 * @var Orm
+	 * @inject
+	 */
+	public $orm;
+
+	/**
+	 * @var User|null User if logged in, NULL if not logged in
+	 */
+	protected $currentUser;
 
 	protected function startup()
 	{
@@ -25,6 +37,10 @@ abstract class BasePresenter extends Presenter
 			if (!in_array($this->name, ['Homepage', 'Sign', 'Register', 'Feedback'], true)) {
 				$this->redirect('Sign:in');
 			}
+		}
+
+		if ($this->getUser()->isLoggedIn()) {
+			$this->currentUser = $this->orm->users->getById($this->getUser()->getId());
 		}
 	}
 
