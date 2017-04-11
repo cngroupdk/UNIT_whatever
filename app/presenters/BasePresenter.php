@@ -31,7 +31,9 @@ abstract class BasePresenter extends Presenter
 		parent::startup();
 
 		if ($this->getUser()->isLoggedIn()) {
-			if ($this->name === 'Sign' && !in_array($this->action, ['up', 'out'], true)) {
+			if (($this->name === 'Sign' && !in_array($this->action, ['up', 'out'], true))
+				|| $this->name === 'Register'
+			) {
 				$this->redirect('Admin:');
 			}
 		} else {
