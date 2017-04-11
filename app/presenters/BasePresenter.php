@@ -47,4 +47,11 @@ abstract class BasePresenter extends Presenter
 		}
 	}
 
+
+	protected function beforeRender()
+	{
+		$template = $this->getTemplate();
+		$template->add('currentUser', $this->currentUser);
+	}
+
 }
