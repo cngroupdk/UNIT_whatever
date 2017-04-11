@@ -2,13 +2,21 @@
 
 namespace App\Presenters;
 
+use App\Controls\CreatePollForm\ICreatePollFormControlFactory;
 use App\Model\Poll;
+use Nette\Application\BadRequestException;
 
 
 final class AdminPresenter extends BasePresenter
 {
 	const VIEW_FEEDBACKS = 'feedbacks';
 	const VIEW_SHARING = 'sharing';
+
+	/**
+	 * @var ICreatePollFormControlFactory
+	 * @inject
+	 */
+	public $createPollFormControlFactory;
 
 
 	public function actionDefault()
@@ -46,5 +54,19 @@ final class AdminPresenter extends BasePresenter
 		$template = $this->getTemplate();
 		$template->add('poll', $poll);
 		$template->add('view', $view);
+	}
+
+
+	protected function createComponentCreatePollForm()
+	{
+		if ($this->action !== 'add') {
+			throw new BadRequestException();
+		}
+
+		assert($this->currentUser !== null);
+
+		return $this->createPollFormControlFactory->create($this->currentUser, function (Poll $poll) {
+			$this->redirect('detail', ['id' => $poll->id]);
+		});
 	}
 }
