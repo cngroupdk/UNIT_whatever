@@ -8,8 +8,21 @@
 
 <section>
     <div class="container">
-        {control feedbackForm}
-    </div>
+	    <form n:name="feedbackForm" class="wb-feedback-form">
+		    <div>
+			    <label n:name="category">Category:</label>
+			    <select n:name="category"></select>
+		    </div>
+		    <div>
+			    <textarea n:name="answer" placeholder="What is on your mind?"></textarea>
+		    </div>
+			<div>
+				<input n:name="send" />
+			</div>
+		</form>
+
+
+	</div>
 </section>
 
 <footer>
