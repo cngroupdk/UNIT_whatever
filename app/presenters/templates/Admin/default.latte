@@ -1,7 +1,6 @@
 {block head}
-	<link href="{$basePath}/css/landing-page.css" rel="stylesheet"/>
+	<link href="{$basePath}/css/material-dashboard.css" rel="stylesheet"/>
 	<link rel="stylesheet" href="{$basePath}/css/simple-line-icons.css">
-	<link rel="stylesheet" href="{$basePath}/css/device-mockups.css">
 {/block}
 
 {block scripts}
@@ -10,9 +9,24 @@
 {/block}
 
 {block content}
-	<ul>
-		{foreach $polls as $poll}
-			<li><a n:href="Admin:detail $poll->id">{$poll->name}</a></li>
-		{/foreach}
-	</ul>
-{/block}
+<section>
+	<div class="container">
+		{*TODO: <div class="row">
+			<div class="col-xs-12">
+				<button type="button" class="btn btn-success pull-right">Add new</button>
+			</div>
+		</div>*}
+		<div class="row">
+			<div class="col-xs-12 col-md-8 col-md-offset-2 col-sm-12 col-lg-6 col-lg-offset-3">
+				<div class="bs-example">
+					<div class="list-group" n:inner-foreach="$polls as $poll">
+						<a n:href="detail $poll->id" class="list-group-item">
+							<h4 class="list-group-item-heading">{$poll->name}</h4>
+							<p class="list-group-item-text">Number of feedbacks: {$poll->feedbacks->countStored()}</p>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
