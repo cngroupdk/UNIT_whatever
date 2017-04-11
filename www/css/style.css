@@ -297,3 +297,15 @@ header .header-content .header-content-inner {
 .landing-page .navbar {
 	border-bottom: 0;
 }
+
+/* mobile */
+@media screen and (max-width: 768px){
+	.landing-header {
+		background: none;
+		background-color: white;
+	}
+	.rw-words-1 span {
+		left: 50%;
+		margin-left: -85px;
+	}
+}
