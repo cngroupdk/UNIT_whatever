@@ -16,10 +16,6 @@ You can use this command to run the web server:
 
 `php -S localhost:3000 -t www`
 
-And this command to run the broadcast consumer:
-
-`php www/index.php broadcast-consumer`
-
 ## Guest user credentials
 
 Email: guest@example.com
