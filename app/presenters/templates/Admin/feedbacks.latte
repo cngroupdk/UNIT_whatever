@@ -1,0 +1,30 @@
+{block head}
+	<link href="{$basePath}/css/landing-page.css" rel="stylesheet"/>
+	<link rel="stylesheet" href="{$basePath}/css/simple-line-icons.css">
+	<link rel="stylesheet" href="{$basePath}/css/device-mockups.css">
+{/block}
+
+{block content}
+
+	<h1>Feedbacks</h1>
+
+	<h2>... share link etc ...</h2>
+
+	{foreach $feedbacks as $feedback}
+		<table>
+			<caption>Feedback #{$feedback->id}</caption>
+			{foreach $feedback->answers as $answer}
+				<tr>
+					<th>{$answer->category->name}</th>
+					<td>{$answer->text}</td>
+				</tr>
+			{/foreach}
+		</table>
+	{/foreach}
+
+{/block}
+
+{block scripts}
+	{include parent}
+	<script src="{$basePath}/js/awesome-landing-page.js" type="text/javascript"></script>
+{/block}

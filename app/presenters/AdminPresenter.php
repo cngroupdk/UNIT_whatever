@@ -22,7 +22,10 @@ final class AdminPresenter extends BasePresenter
 	 */
 	public function actionFeedbacks($pollId)
 	{
-		// TODO: Implement actionFeedbacks() method
-		throw new \BadMethodCallException('Method ' . __METHOD__ . '() is not implemented.');
+		assert($this->currentUser !== null);
+		$poll = $this->orm->polls->getById($pollId);
+
+		$feedbacks = $this->orm->feedbacks->findBy(['poll' => $poll])->fetchAll();
+		$this->getTemplate()->add('feedbacks', $feedbacks);
 	}
 }
