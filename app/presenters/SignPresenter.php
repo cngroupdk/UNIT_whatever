@@ -83,7 +83,7 @@ class SignPresenter extends BasePresenter
 		$form->addPassword('password', 'Password:')
 			->setRequired('Please provide a password.');
 
-		$form->addSubmit('send', 'Set password');
+		$form->addSubmit('send', 'Save password');
 
 		$form->onSuccess[] = function (Form $form, ArrayHash $values) {
 			$this->userFromToken->setPassword($values->password);

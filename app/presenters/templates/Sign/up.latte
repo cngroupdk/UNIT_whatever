@@ -1,14 +1,15 @@
+{block head}
+	<!-- Material Dashboard CSS -->
+	<link href="{$basePath}/css/material-dashboard.css" rel="stylesheet"/>
+{/block}
+
 {block content}
-<h1 n:block=title>Sign Up</h1>
 
 <div class="wrapper">
-	Hello {$userFromToken->email}! Please set up password.
-	<form class="form-signup" n:name="signUpForm">
-		<div n:foreach="$presenter['signUpForm']->errors as $error" class="alert alert-danger">{$error}</div>
+	<form class="form-signin" n:name="signUpForm">
+
+		<h2 class="form-signin-heading">Set your password</h2>
 		<input n:name="password" class="form-control" placeholder="Password" required=""/>
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Set password</button>
+		<input n:name="send" class="btn btn-lg btn-primary btn-block">
 	</form>
 </div>
-
-
-
