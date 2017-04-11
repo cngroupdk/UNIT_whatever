@@ -9,7 +9,8 @@ use Nextras\Orm\Relationships\OneHasMany;
 /**
  * @property int $id {primary}
  * @property string $email
- * @property string $passwordHash
+ * @property string|null $passwordHash
+ * @property string|null $token
  * @property OneHasMany|Poll[] $polls {1:m Poll::$user}
  */
 class User extends Entity
