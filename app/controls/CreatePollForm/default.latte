@@ -1,39 +1,93 @@
 <form n:name="form" class="wb-create-poll-form" data-wb-default-step="categories">
 	<div class="wb-step-panel" data-wb-step="categories">
-		<div>
-			<label n:name="name">Name:</label>
-			<input n:name="name" />
-		</div>
-		<div>
-			<label n:name="description">Description:</label>
-			<textarea n:name="description" />
-		</div>
-		<div class="wb-categories-container">
-			<div style="display: none;">
-				<div class="wb-category-template">
-					<input type="text" name="categories[]" placeholder="Please enter category name" />
-					<a href="#" class="wb-remove-category-btn">Remove category</a>
+		{*
+		<header>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<ol class="breadcrumb">
+							<li><a href="/homepage/wizard-start">Choose type</a></li>
+							<li class="active">Your new feedback form</li>
+						</ol>
+					</div>
 				</div>
 			</div>
-			{foreach $categories as $category}
-				<div class="wb-category-container">
-					<input type="text" name="categories[]" placeholder="Please enter category name" value="{$category}" />
-					<a href="#" class="wb-remove-category-btn">Remove category</a>
+		</header>
+		*}
+
+		<div class="container" n:if="$form->hasErrors()">
+			<div class="row">
+				<div class="col-sm-12" n:inner-foreach="$form->getErrors() as $error">
+					<div n:class="'alert', $error->type === 'error' ? 'alert-danger'" role="alert">
+						{$error->message}
+					</div>
 				</div>
-			{/foreach}
-		</div>
-		<div>
-			<a href="#" class="wb-add-category-btn">Add category</a>
-		</div>
-		{if $createNewUser}
-			<div>
-				<a href="#" class="wb-switch-step-btn" data-wb-step="create-user">Continue</a>
 			</div>
-		{else}
-			<div>
-				<input n:name="submit" value="Create poll" />
+		</div>
+
+		<section class="newform newform--feedback">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<h2>Basic stuff</h2>
+						<p class="lead">Name and description of your feedback form.</p>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label n:name="name">Name</label>
+							<input n:name="name" class="form-control" placeholder="I.e. 'Product feedback'" />
+						</div>
+						<div class="form-group">
+							<label n:name="description">Description</label>
+							<textarea n:name="description" class="form-control" rows="4"
+								placeholder="What do you want to know more about?"></textarea>
+						</div>
+					</div>
+				</div>
+
+				<hr>
+
+				<div class="row">
+					<div class="col-sm-6">
+						<h2>Categories</h2>
+						<p class="lead">In order to allow respondents to assign their answer to a category,
+							please fill them below.</p>
+					</div>
+					<div class="col-sm-6">
+						<div class="wb-categories-container">
+							<div style="display: none;">
+								<div class="form-group new-category wb-category-template">
+									<label>Category name</label>
+									<input type="text" class="form-control" name="categories[]"
+										placeholder="i.e. 'Workplace'" />
+									<a class="btn btn-danger btn-sm wb-remove-category-btn" href="#"
+										role="button"><i class="icon icon-trash"></i></a>
+								</div>
+							</div>
+							{foreach $categories as $key => $category}
+								<div class="form-group new-category wb-category-container">
+									<label for="wb-default-category-{$key}">Category name</label>
+									<input type="text" class="form-control" id="wb-default-category-{$key}"
+										placeholder="i.e. 'Workplace'" value="{$category}" />
+									<a class="btn btn-danger btn-sm wb-remove-category-btn" href="#"
+										role="button"><i class="icon icon-trash"></i></a>
+								</div>
+							{/foreach}
+						</div>
+
+						<a class="btn btn-default btn-sm wb-add-category-btn" href="#" role="button">Add new</a>
+					</div>
+				</div>
+
+				<hr>
+
+				{if $createNewUser}
+					<button class="btn btn-primary pull-right wb-switch-step-btn" data-wb-step="create-user">Create form</button>
+				{else}
+					<input n:name="submit" class="btn btn-primary pull-right" value="Create form" />
+				{/if}
 			</div>
-		{/if}
+		</section>
 	</div>
 	<div class="wb-step-panel" data-wb-step="create-user" n:if="$createNewUser">
 		<div>

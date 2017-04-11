@@ -15,6 +15,7 @@ jQuery(function($) {
 		$form.data('wb-initialized', true);
 
 		$form.on('click', '.wb-switch-step-btn', function () {
+			event.preventDefault();
 			var step = $(this).data('wb-step');
 			CreatePollForm.switchStep($form, step);
 		});
@@ -22,11 +23,13 @@ jQuery(function($) {
 		var defaultStep = $form.data('wb-default-step');
 		CreatePollForm.switchStep($form, defaultStep);
 
-		$form.on('click', '.wb-add-category-btn', function () {
+		$form.on('click', '.wb-add-category-btn', function (event) {
+			event.preventDefault();
 			CreatePollForm.addCategory($form);
 		});
 
-		$form.on('click', '.wb-remove-category-btn', function () {
+		$form.on('click', '.wb-remove-category-btn', function (event) {
+			event.preventDefault();
 			var $categoryContainer = $(this).closest('.wb-category-container');
 			CreatePollForm.removeCategory($categoryContainer);
 		});
@@ -41,6 +44,8 @@ jQuery(function($) {
 		});
 	};
 
+	var categoryCounter = 1;
+
 	CreatePollForm.addCategory = function ($form) {
 		var $categoriesContainer = $form.find('.wb-categories-container');
 		var $categoryTemplate = $form.find('.wb-category-template');
@@ -49,6 +54,12 @@ jQuery(function($) {
 		$category.removeClass('wb-category-template');
 		$category.addClass('wb-category-container');
 		$category.appendTo($categoriesContainer);
+
+		var $label = $category.find('label');
+		var $input = $category.find('input');
+		var id = 'wb-dynamic-category-' + categoryCounter++;
+		$input.attr('id', id);
+		$label.attr('for', id);
 	};
 
 	CreatePollForm.removeCategory = function ($categoryContainer) {
