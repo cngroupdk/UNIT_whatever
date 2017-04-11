@@ -22,7 +22,7 @@ abstract class BasePresenter extends Presenter
 				$this->redirect('Chat:');
 			}
 		} else {
-			if (!in_array($this->name, ['Homepage', 'Sign', 'Register'], true)) {
+			if (!in_array($this->name, ['Homepage', 'Sign', 'Register', 'Feedback'], true)) {
 				$this->redirect('Sign:in');
 			}
 		}
