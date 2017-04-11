@@ -2,25 +2,15 @@
 
 namespace App\Presenters;
 
-use App\Model\Orm;
 use App\Model\User;
-use App\Forms;
 use Nette\Application\UI\Form;
-use Nette\Forms\Controls\TextInput;
 use Nette\Security\AuthenticationException;
+use Nette\Security\Identity;
 use Nette\Utils\ArrayHash;
-use Nextras\Dbal\UniqueConstraintViolationException;
 
 
 class SignPresenter extends BasePresenter
 {
-	/**
-	 * @var Orm
-	 * @inject
-	 */
-	public $orm;
-
-
 	protected function createComponentSignInForm()
 	{
 		$form = new Form();
@@ -44,39 +34,49 @@ class SignPresenter extends BasePresenter
 				return;
 			}
 
-			$this->redirect('Chat:');
+			$this->redirect('Admin:');
 		};
 
 		return $form;
 	}
 
 
+	/** @var User */
+	private $userFromToken;
+
+
+	public function actionUp(string $token)
+	{
+		$this->userFromToken = $this->orm->users->getBy(['token' => $token]);
+		if ($this->userFromToken === null) {
+			$this->flashMessage('Token is invalid', 'error');
+			$this->redirect('Sign:in');
+		}
+
+		$this->getTemplate()->add('userFromToken', $this->userFromToken);
+	}
+
+
 	protected function createComponentSignUpForm()
 	{
-		$form = new Form();
+		assert($this->userFromToken !== null);
 
-		$form->addEmail('email', 'Email:')
-			->setRequired('Please enter your email.');
+		$form = new Form();
 
 		$form->addPassword('password', 'Password:')
 			->setRequired('Please provide a password.');
 
-		$form->addSubmit('send', 'Sign up');
+		$form->addSubmit('send', 'Set password');
 
 		$form->onSuccess[] = function (Form $form, ArrayHash $values) {
-			try {
-				$user = new User();
-				$user->email = $values->email;
-				$user->setPassword($values->password);
-				$this->orm->persistAndFlush($user);
-			} catch (UniqueConstraintViolationException $e) {
-				/** @var TextInput $emailControl */
-				$emailControl = $form['email'];
-				$emailControl->addError('User with this email address already exists.');
-				return;
-			}
+			$this->userFromToken->setPassword($values->password);
+			$this->userFromToken->token = null;
+			$this->orm->persistAndFlush($this->userFromToken);
 
-			$this->redirect('Chat:');
+			$this->flashMessage('Password was successfully set. You are logged in.', 'success');
+			$this->getUser()->login(new Identity($this->userFromToken->id));
+
+			$this->redirect('Admin:');
 		};
 
 		return $form;

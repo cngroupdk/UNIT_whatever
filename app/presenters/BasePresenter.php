@@ -25,13 +25,14 @@ abstract class BasePresenter extends Presenter
 	 */
 	protected $currentUser;
 
+
 	protected function startup()
 	{
 		parent::startup();
 
 		if ($this->getUser()->isLoggedIn()) {
 			if ($this->name === 'Sign' && $this->action !== 'out') {
-				$this->redirect('Chat:');
+				$this->redirect('Admin:');
 			}
 		} else {
 			if (!in_array($this->name, ['Homepage', 'Sign', 'Register', 'Feedback'], true)) {

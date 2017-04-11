@@ -1,6 +1,14 @@
 {block content}
 <h1 n:block=title>Sign Up</h1>
 
-{control signUpForm}
+<div class="wrapper">
+	Hello {$userFromToken->email}! Please set up password.
+	<form class="form-signup" n:name="signUpForm">
+		<div n:foreach="$presenter['signUpForm']->errors as $error" class="alert alert-danger">{$error}</div>
+		<input n:name="password" class="form-control" placeholder="Password" required=""/>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Set password</button>
+	</form>
+</div>
 
-<p><a n:href="in">Already have an account? Log in.</a></p>
+
+
