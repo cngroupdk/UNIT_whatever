@@ -2,6 +2,8 @@
 
 namespace App\Presenters;
 
+use App\Model\Answer;
+use App\Model\Feedback;
 use App\Model\Orm;
 use Nette\Application\UI\Form;
 use App\Model\Poll;
@@ -40,7 +42,21 @@ final class FeedbackPresenter extends BasePresenter
         $form->addSubmit('send', 'Send feedback');
 
         $form->onSuccess[] = function (Form $form, $values) {
-            dump($values);
+            $answer = new Answer;
+            $answer->category = $this->orm->categories->findById($values['category'])->fetch();
+            $answer->text = $values['answer'];
+
+            $feedback = new Feedback;
+            $feedback->poll = $this->poll;
+            $feedback->createdAt = new \DateTimeImmutable;
+            $feedback->answers->add($answer);
+            $this->orm->persistAndFlush($feedback);
+
+            $this->flashMessage(
+                'Thank you! Your feedback was successfully recorded!',
+                'success'
+            );
+            $this->redirect('Homepage:');
 		};
 
         return $form;
