@@ -5,6 +5,7 @@ namespace App\Presenters;
 use App\Model\Answer;
 use App\Model\Feedback;
 use App\Model\Orm;
+use Nette\Application\BadRequestException;
 use Nette\Application\UI\Form;
 use App\Model\Poll;
 
@@ -18,7 +19,7 @@ final class FeedbackPresenter extends BasePresenter
 	public $orm;
 
 	/**
-     * @var Poll
+     * @var Poll|null
      */
 	private $poll;
 
@@ -36,6 +37,10 @@ final class FeedbackPresenter extends BasePresenter
 
     protected function createComponentFeedbackForm()
     {
+        if ($this->action !== 'default') {
+            throw new BadRequestException();
+        }
+
         $form = new Form;
 
         $categories = $this->orm->categories->findBy(['poll' => $this->poll])->fetchPairs('id', 'name');
