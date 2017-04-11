@@ -245,3 +245,23 @@ body {
 header .header-content .header-content-inner {
 	width: 100%;
 }
+
+.landing-header {
+	background-image: url(../images/screen.png);
+	background-position: right;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.section-brands {
+	opacity: .8;
+}
+
+.section-heading {
+	font-size: 50px;
+	color: #232323;
+}
+
+.text-muted--onyellow {
+	color: #404040;
+}
