@@ -289,3 +289,7 @@ header .header-content .header-content-inner {
 .bs-wizard > .bs-wizard-step:last-child  > .progress {width: 50%;}
 .bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }
 /*END Form Wizard*/
+
+.navbar-brand img {
+	max-height: 100%;
+}
