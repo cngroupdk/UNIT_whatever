@@ -67,8 +67,8 @@
 							{foreach $categories as $key => $category}
 								<div class="form-group new-category wb-category-container">
 									<label for="wb-default-category-{$key}">Category name</label>
-									<input type="text" class="form-control" id="wb-default-category-{$key}"
-										placeholder="i.e. 'Workplace'" value="{$category}" />
+									<input type="text" class="form-control" name="categories[]" value="{$category}"
+										id="wb-default-category-{$key}" placeholder="i.e. 'Workplace'" />
 									<a class="btn btn-danger btn-sm wb-remove-category-btn" href="#"
 										role="button"><i class="icon icon-trash"></i></a>
 								</div>
@@ -114,14 +114,12 @@
 						<p class="lead">We will send you a link to create your password.<br>
 							You will then be able to access results and create new forms.</p>
 
-						<form>
-							<div class="form-group">
-								<label n:name="email">Email address</label>
-								<input n:name="email" class="form-control" placeholder="Type here...">
-							</div>
+						<div class="form-group">
+							<label n:name="email">Email address</label>
+							<input n:name="email" class="form-control" placeholder="Type here...">
+						</div>
 
-							<p class="text-center"><input n:name="submit" class="btn btn-primary" value="Finish" /></p>
-						</form>
+						<p class="text-center"><input n:name="submit" class="btn btn-primary" value="Finish" /></p>
 					</div>
 
 				</div>
