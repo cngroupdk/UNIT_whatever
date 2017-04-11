@@ -2,25 +2,37 @@
 
 namespace App\Presenters;
 
+use App\Model\Orm;
 use Nette\Application\UI\Form;
+use App\Model\Poll;
 
 final class FeedbackPresenter extends BasePresenter
 {
-    public function renderDefault()
+    /**
+	 * @var Orm
+	 * @inject
+	 */
+	public $orm;
+
+	/** @var Poll */
+	private $poll;
+
+
+    public function actionDefault(int $id)
     {
-        dump($this->request->getParameter('poolId'));
+        $this->poll = $this->orm->polls->findById($id)->fetch();
+        if ($this->poll === null) {
+            $this->flashMessage(sprintf('Poll with id "%s" not found.', $id), 'error');
+            $this->redirect('Homepage:');
+        }
+
     }
 
 
     protected function createComponentFeedbackForm()
     {
         $form = new Form;
-
-        $categories = [
-            'category1',
-            'category2',
-            'category3',
-        ];
+        $categories = $this->orm->categories->findBy(['poll' => $this->poll])->fetchPairs('id', 'name');
 
         $form->addSelect('category', 'Category:', $categories)
             ->setPrompt('---category---');
