@@ -44,21 +44,39 @@
 
 					<div class="card-content" n:if="$view === 'feedbacks'">
 						{if count($poll->feedbacks)}
-                        	<ul class="result-details">
-                        		<li n:foreach="$poll->feedbacks as $feedback">
-                        			{foreach $feedback->answers as $answer}
-                        				<p><strong>{$answer->category->name}</strong></p>
-                        				<p>{$answer->text}</p>
-                        			{/foreach}
+							<ul class="result-details">
+								<li n:foreach="$poll->feedbacks as $feedback">
+									{foreach $feedback->answers as $answer}
+										<p><strong>{$answer->category->name}</strong></p>
+										<p>{$answer->text}</p>
+									{/foreach}
 
-                        			<div>
-                        				<span><i class="material-icons">watch_later</i> {$feedback->createdAt|date:'F j, Y H:m'}</span>
-                        			</div>
-                        		</li>
-                        	</ul>
-                        {else}
-                        	{*TODO*}
-                        {/if}
+									<div>
+										<span><i class="material-icons">watch_later</i> {$feedback->createdAt|date:'F j, Y H:m'}</span>
+									</div>
+								</li>
+							</ul>
+						{else}
+							<div class="panel panel-default">
+								<div class="panel-body">
+									No results yet :(
+								</div>
+							</div>
+						{/if}
+					</div>
+
+					<div class="card-content" n:if="$view === 'sharing'">
+						<div class="form-group">
+							<label for="shareLink">Share link</label>
+							<input type="text" id="shareLink" value="{link //Feedback: $poll->id}" class="form-control" onClick="this.select();">
+						</div>
+
+						{*<h5 class="text-center">Social shares</h5>
+						<div class="social-shares">
+							<a href="#"><i class="fa fa-facebook-square fa-3x"></i></a>
+							<a href="#"><i class="fa fa-twitter-square fa-3x"></i></a>
+							<a href="#"><i class="fa fa-envelope fa-3x"></i></a>
+						</div>*}
 					</div>
 				</div>
 			</div>
