@@ -132,10 +132,27 @@ class CreatePollFormControl extends BaseControl
 	{
 		/** @var Form $form */
 		$form = $this['form'];
+
+		if (!$form->isSubmitted()) {
+			return $this->getDefaultCategories();
+		}
+
 		$categories = $form->getHttpData($form::DATA_LINE, 'categories[]');
 
 		return array_filter($categories, function ($value) {
 			return trim($value) !== '';
 		});
+	}
+
+
+	/**
+	 * @return string[]
+	 */
+	private function getDefaultCategories()
+	{
+		return [
+			'',
+			'Others',
+		];
 	}
 }
