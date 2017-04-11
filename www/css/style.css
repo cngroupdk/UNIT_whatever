@@ -309,3 +309,11 @@ header .header-content .header-content-inner {
 		margin-left: -85px;
 	}
 }
+
+.social-shares {
+	text-align: center;
+}
+
+.social-shares a {
+	padding: 0 6px;
+}
