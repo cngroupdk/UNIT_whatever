@@ -1,14 +1,6 @@
-parameters:
-	bunny:
-		host: 127.0.0.1
-		vhost: /unittest
-		user: unit
-		password: unittest
-
-
 dbal:
 	driver: mysqli
 	host: 127.0.0.1
-	username: unit
-	password: unittest
-	database: unittest
+	username: whateverbox
+	password: whateverbox
+	database: whateverbox

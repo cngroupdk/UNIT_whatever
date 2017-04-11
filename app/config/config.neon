@@ -27,11 +27,6 @@ session:
 
 
 services:
-	- App\Chat\BroadcastConsumer
-	- App\Chat\BroadcastProducer
-	- App\Chat\BunnyClientFactory(%bunny%)
-	- App\Chat\IBroadcastServerFactory
-
 	- App\Security\Authenticator
 
 	router: App\RouterFactory::createRouter
@@ -39,7 +34,6 @@ services:
 
 console:
 	commands:
-		- App\Console\BroadcastConsumerCommand
 		- App\Console\CreateUserCommand
 
 
