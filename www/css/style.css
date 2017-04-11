@@ -293,3 +293,7 @@ header .header-content .header-content-inner {
 .navbar-brand img {
 	max-height: 100%;
 }
+
+.landing-page .navbar {
+	border-bottom: 0;
+}
