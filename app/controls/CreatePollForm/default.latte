@@ -1,29 +1,29 @@
 <form n:name="form" class="wb-create-poll-form" data-wb-default-step="categories">
 	<div class="wb-step-panel" data-wb-step="categories">
-		{*
 		<header>
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12">
 						<ol class="breadcrumb">
-							<li><a href="/homepage/wizard-start">Choose type</a></li>
+							{*<li><a href="/homepage/wizard-start">Choose type</a></li>*}
 							<li class="active">Your new feedback form</li>
 						</ol>
 					</div>
 				</div>
 			</div>
 		</header>
-		*}
 
-		<div class="container" n:if="$form->hasErrors()">
-			<div class="row">
-				<div class="col-sm-12" n:inner-foreach="$form->getErrors() as $error">
-					<div n:class="'alert', $error->type === 'error' ? 'alert-danger'" role="alert">
-						{$error->message}
+		{block formErrors}
+			<div class="container" n:if="$form->hasErrors()">
+				<div class="row">
+					<div class="col-sm-12" n:inner-foreach="$form->getErrors() as $error">
+						<div n:class="'alert', $error->type === 'error' ? 'alert-danger'" role="alert">
+							{$error->message}
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		{/block}
 
 		<section class="newform newform--feedback">
 			<div class="container">
@@ -90,15 +90,42 @@
 		</section>
 	</div>
 	<div class="wb-step-panel" data-wb-step="create-user" n:if="$createNewUser">
-		<div>
-			<a href="#" class="wb-switch-step-btn" data-wb-step="categories">Back</a>
-		</div>
-		<div>
-			<label n:name="email">Email:</label>
-			<input n:name="email" />
-		</div>
-		<div>
-			<input n:name="submit" value="Sign up and create poll" />
-		</div>
+		<header>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<ol class="breadcrumb">
+							{*<li><a href="/homepage/wizard-start">Choose type</a></li>*}
+							<li><a href="#" class="wb-switch-step-btn" data-wb-step="categories">Your feedback form</a></li>
+							<li class="active">Last step</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		{include formErrors}
+
+		<section class="newform newform--feedback">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3">
+						<h2>And finally, your email</h2>
+						<p class="lead">We will send you a link to create your password.<br>
+							You will then be able to access results and create new forms.</p>
+
+						<form>
+							<div class="form-group">
+								<label n:name="email">Email address</label>
+								<input n:name="email" class="form-control" placeholder="Type here...">
+							</div>
+
+							<p class="text-center"><input n:name="submit" class="btn btn-primary" value="Finish" /></p>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</section>
 	</div>
 </form>
