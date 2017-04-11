@@ -113,6 +113,7 @@ class CreatePollFormControl extends BaseControl
 		$poll->user = $user;
 		$poll->name = $values->name;
 		$poll->description = $values->description;
+		$poll->type = Poll::TYPE_SINGLE_CATEGORY;
 
 		foreach ($this->getCategories() as $categoryName) {
 			$category = new Category();
