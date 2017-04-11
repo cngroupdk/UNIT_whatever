@@ -35,6 +35,14 @@ final class FeedbackPresenter extends BasePresenter
     }
 
 
+    public function renderDefault()
+    {
+        assert($this->poll !== null);
+        $template = $this->getTemplate();
+        $template->add('poll', $this->poll);
+    }
+
+
     protected function createComponentFeedbackForm()
     {
         if ($this->action !== 'default') {
