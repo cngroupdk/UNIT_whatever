@@ -11,8 +11,8 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property string $name
  * @property string $description
  * @property string $type {enum self::TYPE_*}
- * @property OneHasMany|Category[] $categories {1:m Category::$poll}
- * @property OneHasMany|Feedback[] $feedbacks {1:m Feedback::$poll}
+ * @property OneHasMany|Category[] $categories {1:m Category::$poll, orderBy=id}
+ * @property OneHasMany|Feedback[] $feedbacks {1:m Feedback::$poll, orderBy=[createdAt=DESC]}
  */
 class Poll extends Entity
 {
