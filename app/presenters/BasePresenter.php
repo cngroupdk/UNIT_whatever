@@ -31,7 +31,7 @@ abstract class BasePresenter extends Presenter
 		parent::startup();
 
 		if ($this->getUser()->isLoggedIn()) {
-			if ($this->name === 'Sign' && $this->action !== 'out') {
+			if ($this->name === 'Sign' && !in_array($this->action, ['up', 'out'], true)) {
 				$this->redirect('Admin:');
 			}
 		} else {
@@ -42,6 +42,8 @@ abstract class BasePresenter extends Presenter
 
 		if ($this->getUser()->isLoggedIn()) {
 			$this->currentUser = $this->orm->users->getById($this->getUser()->getId());
+		} else {
+			$this->currentUser = null;
 		}
 	}
 

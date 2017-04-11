@@ -5,12 +5,10 @@
 {/block}
 
 {block content}
-
 	<h1>Feedbacks</h1>
-
 	<h2>... share link etc ...</h2>
 
-	{foreach $feedbacks as $feedback}
+	{foreach $poll->feedbacks as $feedback}
 		<table>
 			<caption>Feedback #{$feedback->id}</caption>
 			{foreach $feedback->answers as $answer}
@@ -21,7 +19,6 @@
 			{/foreach}
 		</table>
 	{/foreach}
-
 {/block}
 
 {block scripts}

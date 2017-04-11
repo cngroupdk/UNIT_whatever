@@ -11,7 +11,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property string $email
  * @property string|null $passwordHash
  * @property string|null $token
- * @property OneHasMany|Poll[] $polls {1:m Poll::$user}
+ * @property OneHasMany|Poll[] $polls {1:m Poll::$user, orderBy=name}
  */
 class User extends Entity
 {

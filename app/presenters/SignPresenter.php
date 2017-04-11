@@ -11,6 +11,12 @@ use Nette\Utils\ArrayHash;
 
 class SignPresenter extends BasePresenter
 {
+	/**
+	 * @var User|null
+	 */
+	private $userFromToken;
+
+
 	protected function createComponentSignInForm()
 	{
 		$form = new Form();
@@ -41,15 +47,26 @@ class SignPresenter extends BasePresenter
 	}
 
 
-	/** @var User */
-	private $userFromToken;
-
-
-	public function actionUp(string $token)
+	/**
+	 * @param string $email
+	 * @param string $token
+	 */
+	public function actionUp(string $email, string $token)
 	{
-		$this->userFromToken = $this->orm->users->getBy(['token' => $token]);
-		if ($this->userFromToken === null) {
-			$this->flashMessage('Token is invalid', 'error');
+		$this->userFromToken = $this->orm->users->getBy(['email' => $email]);
+
+		if (!$this->userFromToken) {
+			$this->flashMessage('User not found.', 'error');
+			$this->redirect('Sign:in');
+		}
+
+		if ($this->userFromToken->token === null) {
+			$this->flashMessage('Password has already been set.', 'error');
+			$this->redirect('Sign:in');
+		}
+
+		if ($this->userFromToken->token !== $token) {
+			$this->flashMessage('Access denied', 'error');
 			$this->redirect('Sign:in');
 		}
 
@@ -73,9 +90,8 @@ class SignPresenter extends BasePresenter
 			$this->userFromToken->token = null;
 			$this->orm->persistAndFlush($this->userFromToken);
 
-			$this->flashMessage('Password was successfully set. You are logged in.', 'success');
 			$this->getUser()->login(new Identity($this->userFromToken->id));
-
+			$this->flashMessage('Password was saved. You are now logged in.', 'success');
 			$this->redirect('Admin:');
 		};
 
@@ -89,5 +105,4 @@ class SignPresenter extends BasePresenter
 		$this->flashMessage('You have been signed out.');
 		$this->redirect('Sign:in');
 	}
-
 }

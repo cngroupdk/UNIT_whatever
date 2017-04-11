@@ -2,30 +2,38 @@
 
 namespace App\Presenters;
 
+use App\Model\Poll;
+
 
 final class AdminPresenter extends BasePresenter
 {
-	/**
-	 * List of Polls
-	 */
 	public function actionDefault()
 	{
 		assert($this->currentUser !== null);
-		$this->getTemplate()->add('polls', $this->orm->polls->findBy(['user' => $this->currentUser])->fetchAll());
+		$this->getTemplate()->add('polls', $this->currentUser->polls);
 	}
 
 
 	/**
-	 * List of feedbacks of some Poll
-	 *
-	 * @param $pollId
+	 * @param int $id
 	 */
-	public function actionFeedbacks($pollId)
+	public function actionDetail($id)
 	{
-		assert($this->currentUser !== null);
-		$poll = $this->orm->polls->getById($pollId);
+		/** @var Poll|null $poll */
+		$poll = $this->orm->polls->getById($id);
 
-		$feedbacks = $this->orm->feedbacks->findBy(['poll' => $poll])->fetchAll();
-		$this->getTemplate()->add('feedbacks', $feedbacks);
+		if (!$poll) {
+			$this->flashMessage('Poll not found', 'warning');
+			$this->redirect('default');
+		}
+
+		assert($this->currentUser !== null);
+
+		if ($poll->user->id !== $this->currentUser->id) {
+			$this->flashMessage('Access denied', 'error');
+			$this->redirect('default');
+		}
+
+		$this->getTemplate()->add('poll', $poll);
 	}
 }
