@@ -54,10 +54,6 @@ body {
   background: #eee !important;
 }
 
-.wrapper {
-	padding-top: 80px;
-}
-
 .form-signin {
   max-width: 380px;
   padding: 15px 35px 45px;
