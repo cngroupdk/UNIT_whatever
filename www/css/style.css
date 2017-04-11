@@ -120,3 +120,27 @@ body {
 	color: #dd4b39;
 	font-size: 90px;
 }
+
+/* admin */
+.ct-chart-pie .ct-label {
+	fill: rgba(255,255,255,.8);
+	dominant-baseline: central;
+	font-size: 1em;
+}
+.result-details {
+	list-style-type: none;
+	padding: 0;
+}
+.result-details li {
+	float: left;
+	width: 100%;
+	border-top: 1px solid #ddd;
+	padding: 20px 0;
+}
+.result-details li .material-icons {
+	font-size: 12px;
+	color: #333333;
+}
+.result-details li span {
+	font-size: 12px;
+}
