@@ -7,10 +7,10 @@ dbal:
 
 
 mail:
-    smtp: true
-    host: smtp.postmarkapp.com
-    port: 587
-    username: 37d516d1-146f-4e23-abf3-49d77930b898
-    password: 37d516d1-146f-4e23-abf3-49d77930b898
-    secure: tls
-    timeout: 10
+		smtp: true
+		host: smtp.postmarkapp.com
+		port: 587
+		username: 37d516d1-146f-4e23-abf3-49d77930b898
+		password: 37d516d1-146f-4e23-abf3-49d77930b898
+		secure: tls
+		timeout: 10
