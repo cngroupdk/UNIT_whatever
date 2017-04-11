@@ -90,3 +90,23 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+
+.new-category {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.new-category label {
+	flex-grow: 1;
+	flex-basis: 100%;
+}
+
+.new-category input {
+	flex-basis: 50%;
+	flex-grow: 1;
+}
+
+.new-category .btn {
+	margin-left: 10px;
+}
