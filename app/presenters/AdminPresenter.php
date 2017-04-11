@@ -7,6 +7,10 @@ use App\Model\Poll;
 
 final class AdminPresenter extends BasePresenter
 {
+	const VIEW_FEEDBACKS = 'feedbacks';
+	const VIEW_SHARING = 'sharing';
+
+
 	public function actionDefault()
 	{
 		assert($this->currentUser !== null);
@@ -16,8 +20,9 @@ final class AdminPresenter extends BasePresenter
 
 	/**
 	 * @param int $id
+	 * @param string|null $view
 	 */
-	public function actionDetail($id)
+	public function actionDetail($id, $view = null)
 	{
 		/** @var Poll|null $poll */
 		$poll = $this->orm->polls->getById($id);
@@ -34,6 +39,12 @@ final class AdminPresenter extends BasePresenter
 			$this->redirect('default');
 		}
 
-		$this->getTemplate()->add('poll', $poll);
+		if ($view === null || !in_array($view, [self::VIEW_FEEDBACKS, self::VIEW_SHARING], true)) {
+			$view = $poll->feedbacks->countStored() > 0 ? self::VIEW_FEEDBACKS : self::VIEW_SHARING;
+		}
+
+		$template = $this->getTemplate();
+		$template->add('poll', $poll);
+		$template->add('view', $view);
 	}
 }

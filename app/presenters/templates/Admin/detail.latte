@@ -1,27 +1,68 @@
+{extends ../@layout.latte}
+
 {block head}
-	<link href="{$basePath}/css/landing-page.css" rel="stylesheet"/>
 	<link rel="stylesheet" href="{$basePath}/css/simple-line-icons.css">
 	<link rel="stylesheet" href="{$basePath}/css/device-mockups.css">
-{/block}
-
-{block content}
-	<h1>Feedbacks</h1>
-	<h2>... share link etc ...</h2>
-
-	{foreach $poll->feedbacks as $feedback}
-		<table>
-			<caption>Feedback #{$feedback->id}</caption>
-			{foreach $feedback->answers as $answer}
-				<tr>
-					<th>{$answer->category->name}</th>
-					<td>{$answer->text}</td>
-				</tr>
-			{/foreach}
-		</table>
-	{/foreach}
 {/block}
 
 {block scripts}
 	{include parent}
 	<script src="{$basePath}/js/awesome-landing-page.js" type="text/javascript"></script>
+{/block}
+
+{block content}
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-md-8 col-md-offset-2 col-sm-12 col-lg-6 col-lg-offset-3">
+				<h1 class="topheading">{$poll->name}</h1>
+
+				<div class="card card-nav-tabs">
+					<div class="card-header" data-background-color="purple">
+						<div class="nav-tabs-navigation">
+							<div class="nav-tabs-wrapper">
+								<span class="nav-tabs-title">Options:</span>
+								<ul class="nav nav-tabs" data-tabs="tabs">
+									<li n:class="$view === 'feedbacks' ? 'active'">
+										<a n:href="this, view => 'feedbacks'">
+											<i class="material-icons">view_list</i>
+											Feedbacks
+											<div class="ripple-container"></div>
+										</a>
+									</li>
+									<li n:class="$view === 'sharing' ? 'active'">
+										<a n:href="this, view => 'sharing'">
+											<i class="material-icons">share</i>
+											Sharing
+											<div class="ripple-container"></div>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="card-content" n:if="$view === 'feedbacks'">
+						{if count($poll->feedbacks)}
+                        	<ul class="result-details">
+                        		<li n:foreach="$poll->feedbacks as $feedback">
+                        			{foreach $feedback->answers as $answer}
+                        				<p><strong>{$answer->category->name}</strong></p>
+                        				<p>{$answer->text}</p>
+                        			{/foreach}
+
+                        			<div>
+                        				<span><i class="material-icons">watch_later</i> {$feedback->createdAt|date:'F j, Y H:m'}</span>
+                        			</div>
+                        		</li>
+                        	</ul>
+                        {else}
+                        	{*TODO*}
+                        {/if}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 {/block}
