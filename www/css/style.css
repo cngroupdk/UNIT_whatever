@@ -144,3 +144,12 @@ body {
 .result-details li span {
 	font-size: 12px;
 }
+
+.boxes img {
+	max-width: 100%;
+}
+
+.topheading {
+	font-weight: bold;
+	color: black;
+}
