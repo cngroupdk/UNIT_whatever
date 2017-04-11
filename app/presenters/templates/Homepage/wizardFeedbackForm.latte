@@ -6,18 +6,27 @@
 
 {block content}
 
-<header>
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12">
-				<ol class="breadcrumb">
-					<li><a href="/homepage/wizard-start">Choose type</a></li>
-					<li class="active">Your new feedback form</li>
-				</ol>
-			</div>
-		</div>
+<div class="container">
+	<div class="row bs-wizard" style="border-bottom:0;">
+    <div class="col-xs-4 bs-wizard-step complete">
+      <div class="text-center bs-wizard-stepnum">Step 1</div>
+      <div class="progress"><div class="progress-bar"></div></div>
+      <a href="/homepage/wizard-start" class="bs-wizard-dot"></a>
+    </div>
+
+    <div class="col-xs-4 bs-wizard-step active"><!-- complete -->
+      <div class="text-center bs-wizard-stepnum">Step 2</div>
+      <div class="progress"><div class="progress-bar"></div></div>
+      <a href="#" class="bs-wizard-dot"></a>
+    </div>
+
+    <div class="col-xs-4 bs-wizard-step disabled"><!-- complete -->
+      <div class="text-center bs-wizard-stepnum">Step 3</div>
+      <div class="progress"><div class="progress-bar"></div></div>
+      <a href="#" class="bs-wizard-dot"></a>
+    </div>
 	</div>
-</header>
+</div>
 
 <div class="container">
 	<div class="row">
@@ -81,20 +90,20 @@
 
 
 <footer>
-	<div class="container">
-		<p>&copy; 2016 Start Bootstrap. All Rights Reserved.</p>
-		<ul class="list-inline">
-			<li>
-				<a href="#">Privacy</a>
-			</li>
-			<li>
-				<a href="#">Terms</a>
-			</li>
-			<li>
-				<a href="#">FAQ</a>
-			</li>
-		</ul>
-	</div>
+		<div class="container">
+				<p>&copy; 2016 Start Bootstrap. All Rights Reserved.</p>
+				<ul class="list-inline">
+						<li>
+								<a href="#">Privacy</a>
+						</li>
+						<li>
+								<a href="#">Terms</a>
+						</li>
+						<li>
+								<a href="#">FAQ</a>
+						</li>
+				</ul>
+		</div>
 </footer>
 
 {/block}
