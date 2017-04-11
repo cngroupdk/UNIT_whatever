@@ -17,9 +17,7 @@
 			<div class="container" n:if="$form->hasErrors()">
 				<div class="row">
 					<div class="col-sm-12" n:inner-foreach="$form->getErrors() as $error">
-						<div n:class="'alert', $error->type === 'error' ? 'alert-danger'" role="alert">
-							{$error->message}
-						</div>
+						<div class="alert alert-danger" role="alert">{$error}</div>
 					</div>
 				</div>
 			</div>
