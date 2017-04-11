@@ -10,4 +10,14 @@ final class UsersRepository extends Repository
 	{
 		return [User::class];
 	}
+
+
+	/**
+	 * @param string $email
+	 * @return bool
+	 */
+	public function isEmailTaken($email)
+	{
+		return count($this->getBy(['email' => $email])) > 0;
+	}
 }

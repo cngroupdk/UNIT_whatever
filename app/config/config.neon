@@ -27,7 +27,11 @@ session:
 
 
 services:
+	- App\Controls\CreatePollForm\ICreatePollFormControlFactory
+
 	- App\Security\Authenticator
+
+	- App\Users\UserCreator
 
 	router: App\RouterFactory::createRouter
 

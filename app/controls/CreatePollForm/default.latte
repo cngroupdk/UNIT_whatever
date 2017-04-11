@@ -1,0 +1,50 @@
+<form n:name="form" class="wb-create-poll-form" data-wb-default-step="categories">
+	<div class="wb-step-panel" data-wb-step="categories">
+		<div>
+			<label n:name="name">Name:</label>
+			<input n:name="name" />
+		</div>
+		<div>
+			<label n:name="description">Description:</label>
+			<textarea n:name="description" />
+		</div>
+		<div class="wb-categories-container">
+			<div style="display: none;">
+				<div class="wb-category-template">
+					<input type="text" name="categories[]" placeholder="Please enter category name" />
+					<a href="#" class="wb-remove-category-btn">Remove category</a>
+				</div>
+			</div>
+			{foreach $categories as $category}
+				<div class="wb-category-container">
+					<input type="text" name="categories[]" placeholder="Please enter category name" value="{$category}" />
+					<a href="#" class="wb-remove-category-btn">Remove category</a>
+				</div>
+			{/foreach}
+		</div>
+		<div>
+			<a href="#" class="wb-add-category-btn">Add category</a>
+		</div>
+		{if $createNewUser}
+			<div>
+				<a href="#" class="wb-switch-step-btn" data-wb-step="create-user">Continue</a>
+			</div>
+		{else}
+			<div>
+				<input n:name="submit" value="Create poll" />
+			</div>
+		{/if}
+	</div>
+	<div class="wb-step-panel" data-wb-step="create-user" n:if="$createNewUser">
+		<div>
+			<a href="#" class="wb-switch-step-btn" data-wb-step="categories">Back</a>
+		</div>
+		<div>
+			<label n:name="email">Email:</label>
+			<input n:name="email" />
+		</div>
+		<div>
+			<input n:name="submit" value="Sign up and create poll" />
+		</div>
+	</div>
+</form>

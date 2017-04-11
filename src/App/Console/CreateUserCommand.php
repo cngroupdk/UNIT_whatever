@@ -4,7 +4,6 @@ namespace App\Console;
 
 use App\Model\Orm;
 use App\Model\User;
-use Nette\Security\Passwords;
 use Nette\Utils\Random;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
